@@ -50,10 +50,15 @@ if(mysqli_num_rows($result) === 0){
     $insertSQL = "INSERT INTO users (email, fname, lname, password) VALUES ('$email', '$fname', '$lname', '$password')";
     $wasInserted = mysqli_query($conn, $insertSQL);
 
-    if($wasInserted){
+    $getNewIDSQL = "SELECT ID FROM users WHERE email = '$email' and password = '$password';";
+    $newID = mysqli_query($conn, $getNewIDSQL);
+
+    echo $newID;
+
+    if($wasInserted && false){
         header("Location: ../login/index.php?error=Registration successful!");
         exit();
-    } else {
+    } else if(false) {
         header("Location: index.php?error=Something goes bad!");
         exit();
     }
