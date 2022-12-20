@@ -42,9 +42,6 @@ if(empty($email)){
     exit();
 }
 
-$runSQL = "SET @@GLOBAL.auto_increment_increment = 1;";
-$runResult = mysqli_query($conn, $runSQL);
-
 $sql = "SELECT * FROM users WHERE email = '$email'";
 $result = mysqli_query($conn, $sql);
 
