@@ -127,6 +127,23 @@
 
 			</div>
 
+			<?php
+				$idUser = -1;
+				if(isset($_SESSION['id']) && isset($_SESSION['email']))
+					$idUser = $_SESSION['id'];
+				$sql = "SELECT isAdmin FROM permission WHERE id_user = '$idUser';";
+				$result = mysqli_query($conn, $sql);
+				$result = $result->fetch_object();
+
+				if($idUser != -1 && $result->isAdmin == 1){ 
+			?>
+				<h1>
+					Te iubesc cel mai mult, iubita mea!
+				</h1>
+			<?php
+				}
+			?>
+
 		</div>
 
 	</body>
