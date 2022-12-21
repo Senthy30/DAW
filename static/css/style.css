@@ -1,0 +1,237 @@
+body{
+    background-color: #ffffff;
+}
+
+.content{
+    padding-left: 15vw;
+    padding-right: 15vw;
+}
+
+p {
+    font-family: 'Arial';
+}
+
+.bkImage{
+    position: absolute;
+    z-index: -1;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 40vh;
+}
+
+.topPage {
+    width: 100%;
+    height: 40vh;
+}
+
+.topMenu {
+    margin-top: 2vh;
+    display: flex;
+    flex-direction: row;
+    height: 5vh;
+}
+
+.logo {
+    display: flex;
+    width: 20vw;
+    align-items: center;
+    font-family: 'Arial';
+    color: white;
+    font-size: 38px;
+    font-weight: bold;
+}
+
+.optionsMenu {
+    display: flex;
+    flex-direction: row-reverse;
+    width: 100%;
+}
+
+.menuButton:hover {
+    cursor: pointer;
+    filter: brightness(120%);
+    background-color: #d0ecff;
+}
+
+.menuButton {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: white;
+    border: 2px #0071C2 solid;
+    margin-top: 0.25vh;
+    margin-bottom: 0.25vh;
+    margin-left: 1vw;
+    padding-left: 1vw;
+    padding-right: 1vw;
+}
+
+.textButton {
+    color: #0071C2;
+    font-size: 19px;
+    font-weight: bold;
+}
+
+.menuButtonAdmin:hover {
+    cursor: pointer;
+    background-color: #004ab0;
+}
+
+.menuButtonAdmin {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 2px white solid;
+    margin-top: 0.25vh;
+    margin-bottom: 0.25vh;
+    margin-left: 1vw;
+    padding-left: 1vw;
+    padding-right: 1vw;
+}
+
+.textButtonAdmin {
+    color: white;
+    font-size: 19px;
+    font-weight: bold;
+}
+
+.language {
+    display: flex;
+    height: 100%;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-right: 5vw;
+}
+
+.flagLang {
+    display: block;
+    width: 67%;
+    height: 67%;
+    border-radius: 100%;
+    border: 1.5px white solid;
+}
+
+.currency{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 1vw;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: 'Arial';
+}
+
+.aboutYou {
+    height: 15vh;
+    margin-top: 11vh;
+}
+
+.motto {
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    font-family: 'Arial';
+}
+
+.searchMotto{
+    margin-top: 2vh;
+    color: white;
+    font-size: 25px;
+    font-family: 'Arial';
+}
+
+.searchMenu {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #FEBB02;
+    margin-top: 3vh;
+    height: 6vh;
+    padding: 0.4%;
+    width: 80%;
+    margin-left: 10%;
+}
+
+.typeInput{
+    width: 40%;
+    height: 100%;
+}
+
+.typeInput > input {
+    width: 100%;
+    height: 90%;
+    border: 1px white solid;
+    font-family: 'Arial';
+    font-size: 22px;
+}
+
+.periodInput {
+    display: flex;
+    flex-direction: row;
+    width: 25%;
+}
+
+.checkInOut {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 10%;
+}
+
+.checkInOut > input {
+    height: 60%;
+}
+
+.checkInOut > div {
+    color: black;
+    font-size: 15px;
+    font-weight: bold;
+    font-family: 'Arial';
+}
+
+.numberInput {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 10%;
+}
+
+.numberInput > input {
+    height: 60%;
+    width: 100%;
+    font-size: 20px;
+}
+
+.numberInput > div {
+    color: black;
+    font-size: 15px;
+    font-weight: bold;
+    font-family: 'Arial';
+}
+
+.submitInput:hover {
+    cursor: pointer;
+    background-color: #004ab0;
+}
+
+.submitInput {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #3867d6;
+    width: 10%;
+}
+
+.submitInput > div {
+    margin-left: 1vw;
+    margin-right: 1vw;
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+    font-family: 'Arial';
+}
