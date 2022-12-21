@@ -50,18 +50,22 @@ if(mysqli_num_rows($result) === 0){
     $insertSQL = "INSERT INTO users (email, fname, lname, password) VALUES ('$email', '$fname', '$lname', '$password')";
     $wasInserted = mysqli_query($conn, $insertSQL);
 
-    $getNewIDSQL = "SELECT ID FROM users WHERE email = '$email' and password = '$password';";
-    $newID = mysqli_query($conn, $getNewIDSQL);
+    if($wasInserted){
+        $getNewIDSQL = "SELECT id FROM users WHERE email = '$email' AND password = '$password';";
+        $newID = mysqli_query($conn, $getNewIDSQL);
+        $newID = $newID->fetch_object();
 
-    echo $newID;
+        $insertSQL = "INSERT INTO permission (id_user, isAdmin) VALUES ('$newID->id', '0')";
+        $wasInserted = mysqli_query($conn, $insertSQL);
 
-    if($wasInserted && false){
-        header("Location: ../login/index.php?error=Registration successful!");
-        exit();
-    } else if(false) {
-        header("Location: index.php?error=Something goes bad!");
-        exit();
-    }
+        if($wasInserted){
+            header("Location: ../login/index.php?error=Registration successful!");
+            exit();
+        }
+    } 
+
+    header("Location: index.php?error=Something goes bad!");
+    exit();
 } else {
     header("Location: index.php?error=An account with this email already exists!");
     exit();
