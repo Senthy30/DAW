@@ -27,7 +27,7 @@
 						?>	
 							<div class="menuButton" onclick="window.location.href = 'login/logout.php'">
 								<div class="textButton">
-									Profile
+									Profiles
 								</div>
 							</div>
 						<?php 
