@@ -56,7 +56,7 @@
             exit();
         }
     } else {
-        header("Location: ../index.php?lol=lol");
+        header("Location: ../index.php");
         exit();
     }
 ?>
