@@ -1,4 +1,7 @@
-<?php session_start(); include "db_conn.php";?>
+<?php 
+	session_start(); 
+	include "db_conn.php";
+?>
 
 <!DOCTYPE html>
 <html>
@@ -27,7 +30,7 @@
 						?>	
 							<div class="menuButton" onclick="window.location.href = 'login/logout.php'">
 								<div class="textButton">
-									Profiles
+									Profile
 								</div>
 							</div>
 						<?php 

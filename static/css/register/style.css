@@ -128,7 +128,7 @@ p {
 .loginMenu {
     position: absolute;
     background-color: #FEBB02;
-    height: 65vh;
+    height: 69vh;
     padding: 0.4%;
     width: 24vw;
     left: 33vw;
@@ -174,11 +174,16 @@ p {
     border-radius: 10px;
 }
 
+.submitButton:hover{
+    cursor: pointer;
+    background-color: #004ab0;
+}
+
 .error {
     font-size: 20px;
     font-family: 'Arial';
     font-weight: bold;
-    margin-bottom: -3vh;
+    margin-bottom: -1vh;
     color: #C73E1D;
 }
 

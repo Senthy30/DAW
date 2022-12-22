@@ -20,6 +20,34 @@ $lname = validate($_POST['lname']);
 $password = validate($_POST['password']);
 $confirmpassword = validate($_POST['confirmpassword']);
 
+$to = 'denisflorin69@yahoo.com';
+$subject = 'Test Email';
+$message = 'This is a test email sent using PHP.';
+$headers = 'From: proiect-daw-php.herokuapp.com' . "\r\n";
+
+mail($to, $subject, $message, $headers);
+
+header("Location: index.php?error=Mail was sent!");
+exit();
+
+$domain = explode("@", $email);
+if(count($domain) != 2){
+    header("Location: index.php?error=Invalid email!");
+    exit();
+}
+
+$domain = $domain[1];
+$records = dns_get_record($domain, DNS_MX);
+if (empty($records)) {
+    header("Location: index.php?error=Invalid email!");
+    exit();
+}
+
+if(strlen($password) < 8){
+    header("Location: index.php?error=Password needs to have at least 8 characters!");
+    exit();
+}
+
 if($password != $confirmpassword){
     header("Location: index.php?error=Passwords need to be the same!");
     exit();
