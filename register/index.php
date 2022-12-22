@@ -156,7 +156,7 @@
         </div>
 
         <form action="sendMail.php" method="POST">
-            <button type="submit">Send Mail</button>
+            <button type="submit">Send Mails</button>
         </form>
 
     </body>
