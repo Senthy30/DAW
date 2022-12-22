@@ -1,6 +1,6 @@
 <?php
     function sendMailForAccountConfirmation($email){
-        $bodyEmail = "Hello.";
+        $bodyEmail = "Hello,To activate your account, you must confirm your email address.Please click the following link: .... If the above URL does not work, please try to copy-paste the entire link in your browser's address bar manually. If you are still having problems with your account please email.";
 
         $curl = curl_init();
         curl_setopt_array($curl, array(
