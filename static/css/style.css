@@ -252,7 +252,6 @@ p {
     width: 30.2vh;
     height: 100%;
     padding-right: 1.1vw;
-    border-right: 1px white solid;
 }
 
 .imageRoom > img {
@@ -273,7 +272,6 @@ p {
     flex-direction: row;
     height: 100%;
     margin-bottom: 1%;
-    border-right: 1px white solid;
 }
 
 .mainInfRoom{

@@ -128,6 +128,7 @@
 			</div>
 
 			<?php
+
 				$sql = "SELECT * FROM rooms;";
 				$resultQuery = mysqli_query($conn, $sql);
 				while($result = $resultQuery->fetch_object()){
@@ -137,7 +138,23 @@
 						$name = $name . "⭐";
 					}
 					$floorNr = "Floor " . $result->floor . ", Nr. " . $result->number;
-					$typeRoom = "Apartment with 2 rooms";
+					
+					$capacityRoom = 2;
+					$typeRoom = "Apartment with 1 room";
+					$typeValue = $result->type;
+					if($typeValue >= 2 && $typeValue <= 5) {
+						$typeRoom = "Apartment with " . $typeValue. " rooms"; 
+						$capacityRoom = intval($typeValue) * 2;
+					} else if($typeValue == 6)
+						$typeRoom = "Double room";
+					else if($typeRoom == 7) {
+						$typeRoom = "Triple room";
+						$capacityRoom = 3;
+					} else if($typeRoom == 8) {
+						$typeRoom = "Quadruple room";
+						$capacityRoom = 4;
+					}
+
 					$surface = "Surface " . $result->surface .  "m<sup>2</sup>";
 					$cancellation = "No cancellation";
 					if($result->cancellation != -1)
@@ -207,7 +224,7 @@
 										</div>
 
 										<div>
-											3 nights, 4 persons
+											3 nights, <?php echo $capacityRoom ?> persons
 										</div>
 									</div>
 
