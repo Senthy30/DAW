@@ -1,6 +1,7 @@
 <?php
-    function sendMailForAccountConfirmation($email){
-        $bodyEmail = "Hello,<br>To activate your account, you must confirm your email address.<br>Please click the following link: <br> .... If the above URL does not work, please try to copy-paste the entire link in your browser's address bar manually.<br> If you are still having problems with your account please email.";
+    function sendMailForAccountConfirmation($email, $password){
+        $linkGenerated = "https://proiect-daw-php.herokuapp.com/accountConfirmation?h=" . hash('sha512', $email . $password);
+        $bodyEmail = "Hello,<br>To activate your account, you must confirm your email address.<br>Please click the following link: <br>" . $linkGenerated . "<br> If the above URL does not work, please try to copy-paste the entire link in your browser's address bar manually.<br> If you are still having problems with your account please email.";
 
         $curl = curl_init();
         curl_setopt_array($curl, array(
@@ -29,6 +30,4 @@
             echo $response;
         }
     }
-
-    sendMailForAccountConfirmation("denisflorin69@yahoo.com");
 ?>

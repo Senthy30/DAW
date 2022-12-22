@@ -2,6 +2,7 @@
 
 session_start();
 include "../db_conn.php";
+include "sendMail.php";
 
 if(isset($_POST['email']) && isset($_POST['password']) && isset($_POST['confirmpassword']) && isset($_POST['fname']) && isset($_POST['lname'])) {
 
@@ -64,6 +65,8 @@ $sql = "SELECT * FROM users WHERE email = '$email'";
 $result = mysqli_query($conn, $sql);
 
 if(mysqli_num_rows($result) === 0){
+    sendMailForAccountConfirmation($email, $password);
+    /*
     $password = hash('sha512', $password);
     $insertSQL = "INSERT INTO users (email, fname, lname, password) VALUES ('$email', '$fname', '$lname', '$password')";
     $wasInserted = mysqli_query($conn, $insertSQL);
@@ -81,6 +84,7 @@ if(mysqli_num_rows($result) === 0){
             exit();
         }
     } 
+    */
 
     header("Location: index.php?error=Something goes bad!");
     exit();
