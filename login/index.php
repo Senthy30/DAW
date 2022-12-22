@@ -1,4 +1,19 @@
-<?php session_start(); ?>
+<?php 
+    session_start(); 
+    include "../db_conn.php";
+
+    function sanitize_input($input) {
+        $input = strip_tags($input);
+        $input = htmlspecialchars($input);
+        
+        return $input;
+    }
+
+    if(isset($_SESSION['id'])) {
+        header("Location: ../index.php");
+        exit();
+    }
+?>
 
 <!DOCTYPE html>
 
@@ -8,36 +23,115 @@
 
         <title>Login</title>
 
+        <link rel="stylesheet" href="../static/css/login/style.css">
     </head>
 
     <body>
 
-        <?php if(isset($_SESSION['id']) && isset($_SESSION['email'])) { ?>
-        
-            <h1>You're already log in</h1>
-        
-        <?php } else { ?>
-            <form action="login.php" method="POST">
+        <div class="content">
 
-                <h2>Login</h2>
+            <div class="topPage">
+				<img src="../img/bkImage.png" class="bkImage">
 
-                <?php if(isset($_GET['error'])) { ?>
-                    <p class="error"> <?php echo $_GET['error']; ?> </p>
-                <?php } ?>
+				<div class="topMenu">
 
-                <label> Email </label> <br>
-                <input type="text" name="email" placeholder="Email"> <br> 
-                
-                <label> Password </label> <br>
-                <input type="password" name="password" placeholder="Password"> <br> <br>
+					<div class="logo">
+						Hotel Maria
+					</div>
 
-                <button type=submit> Login </button>
+					<div class="optionsMenu">
+						<?php 
+							if(isset($_SESSION['id'])){
+						?>	
+							<div class="menuButton" onclick="window.location.href = 'login/logout.php'">
+								<div class="textButton">
+									Profiles
+								</div>
+							</div>
+						<?php 
+							} else {
+						?>
+                            <div class="menuButton" onclick="window.location.href = '../register/index.php'">
+								<div class="textButton">
+									Register
+								</div>
+							</div>
+                                
+							<div class="menuButton" onclick="window.location.href = '../index.php'">
+								<div class="textButton">
+									Home
+								</div>
+							</div>
+						<?php
+							}
+						?>
 
-            </form>
+						<?php 
+							$idUser = -1;
+							if(isset($_SESSION['id']))
+								$idUser = $_SESSION['id'];
+							$sql = "SELECT isAdmin FROM permission WHERE id_user = '$idUser';";
+							$result = mysqli_query($conn, $sql);
+							$result = $result->fetch_object();
 
-        <?php } ?>
+							if($idUser != -1 && $result->isAdmin == 1){ 
+						?>
+								<div class="menuButtonAdmin">
+									<div class="textButtonAdmin">
+										Admin
+									</div>
+								</div>
+						<?php 
+							} 
+						?>
 
-        <a href="../index.php">Back to main page</a>
+						<div class="language">
+							<img src="../img/flagRo.png" class="flagLang">
+						</div>
+						
+					</div>
+
+				</div>
+
+                <div class="typePage">
+                    Login
+                </div>
+
+                <div class="loginMenu">
+                    <form action="login.php" method="POST">
+                        <div class="error">
+                            <?php
+                                if(isset($_GET['error'])) {
+                                    $messageError = sanitize_input($_GET['error']);
+                                    print_r($messageError);
+                                } else {
+                                    echo "&nbsp;";
+                                }
+                            ?>
+                        </div>
+                        <div>
+                            <div class="labelDiv">
+                                <label> Email </label>
+                            </div>
+                            <input type="text" name="email" placeholder="Email">
+                        </div>
+
+                        <div>
+                            <div class="labelDiv">
+                                <label> Password </label>
+                            </div>
+                            <input type="password" name="password" placeholder="Password">
+                        </div>
+
+                        <div class="submitDiv">
+                            <button type="submit" class="submitButton"> Sign in </button>
+                        </div>
+                    </form>
+                </div>
+
+			</div>
+
+        </div>
 
     </body>
 
