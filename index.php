@@ -127,22 +127,81 @@
 
 			</div>
 
-			<?php
-				$idUser = -1;
-				if(isset($_SESSION['id']) && isset($_SESSION['email']))
-					$idUser = $_SESSION['id'];
-				$sql = "SELECT isAdmin FROM permission WHERE id_user = '$idUser';";
-				$result = mysqli_query($conn, $sql);
-				$result = $result->fetch_object();
+			<div class="adRoom">
+				<div class="imageRoom">
+					<img src="img/room.jpg">
+				</div>
 
-				if($idUser != -1 && $result->isAdmin == 1){ 
-			?>
-				<h1>
-					Te iubesc cel mai mult, iubita mea!
-				</h1>
-			<?php
-				}
-			?>
+				<div class="contentRoom">
+					<div class="aboutRoom">
+						<div class="mainInfRoom">
+							<div class="nameRoom">
+								Luxury ⭐⭐⭐⭐⭐
+							</div>
+
+							<div class="infRoom">
+								<div class="firstInfRoom">
+									<div class="sthInfRoom">
+										Floor 4, Nr. 402
+									</div>
+
+									<div class="sthInfRoom">
+										Apartment with 2 rooms
+									</div>
+
+									<div class="sthInfRoom">
+										Surface 40m<sup>2</sup>
+									</div>
+								</div>
+
+								<div class="secondInfRoom">
+									<div class="sthInfRoom">
+										Cancellation up to 5 days before
+									</div>
+
+									<div class="sthInfRoom">
+										No advance is required
+									</div>
+
+									<div class="sthInfRoom">
+										Food included
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="scInfRoom">
+							<div class="ratingRoom">
+								<div>
+									8.9
+								</div>
+							</div>
+
+							<div class="priceRoom">
+								<div>
+									1850 lei
+								</div>
+
+								<div>
+									3 nights, 4 persons
+								</div>
+							</div>
+
+							<div class="rentRoom">
+								<div>
+									Reserve now
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="needLogin">
+						<div>
+							Get an exclusive discount and see availability - Sign in
+						</div>
+					</div>
+				</div>
+			</div>
 
 		</div>
 

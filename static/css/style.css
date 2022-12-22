@@ -23,6 +23,7 @@ p {
 .topPage {
     width: 100%;
     height: 40vh;
+    margin-bottom: 6vh;
 }
 
 .topMenu {
@@ -233,5 +234,173 @@ p {
     color: white;
     font-size: 22px;
     font-weight: bold;
+    font-family: 'Arial';
+}
+
+.adRoom{
+    display: flex;
+    flex-direction: row;
+    border: 1px #0071C2 solid;
+    width: 98%;
+    height: 22vh;
+    padding: 1%;
+    background-color: #003580;
+}
+
+.imageRoom {
+    width: 30.2vh;
+    height: 100%;
+    padding-right: 1.1vw;
+    border-right: 1px white solid;
+}
+
+.imageRoom > img {
+    width: 100%;
+    height: 100%;
+    border: 1px white solid;
+}
+
+.contentRoom {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-left: 1.1vw;
+}
+
+.aboutRoom {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    margin-bottom: 1%;
+    border-right: 1px white solid;
+}
+
+.mainInfRoom{
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+    height: 100%;
+    margin-bottom: 1%;
+    border-right: 1px white solid;
+}
+
+.nameRoom {
+    width: 100%;
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    font-family: 'Arial';
+    color: white;
+    margin-bottom: 2%;
+}
+
+.infRoom {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+
+.firstInfRoom {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-right: 1px white solid;
+    padding-right: 1.1vw;
+}
+
+.secondInfRoom {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-left: 1.1vw;
+}
+
+.sthInfRoom {
+    font-size: 20px;
+    font-family: 'Arial';
+    color: white;
+}
+
+.scInfRoom {
+    height: 100%;
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    padding-left: 1.1vw;
+    padding-right: 1.1vw;
+}
+
+.ratingRoom {
+    display: flex;
+    flex-direction: row-reverse;
+    color: white;
+    font-size: 20px;
+    font-family: 'Arial';
+    font-weight: bold;
+}
+
+.ratingRoom > div {
+    border: 2px white solid;
+    padding: 4%;
+}
+
+.priceRoom {
+    height: 50%;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-end;
+}
+
+.priceRoom > div:nth-child(1){
+    color: white;
+    font-size: 25px;
+    font-family: 'Arial';
+    font-weight: bold;
+}
+
+.priceRoom > div:nth-child(2){
+    color: white;
+    font-size: 14px;
+    font-family: 'Arial';
+    font-weight: bold;
+}
+
+.rentRoom{
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    align-items: center;
+    height: 30%;
+    margin-top: 1vh;
+}
+
+.rentRoom > div {
+    background-color: #1E91D6;
+    border: 1px white solid;
+    padding: 3%;
+    color: white;
+    font-size: 23px;
+    font-family: 'Arial';
+    font-weight: bold;
+}
+
+.rentRoom > div:hover {
+    cursor: pointer;
+    filter: brightness(90%);
+}
+
+.needLogin {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 18%;
+    border: 1px white solid;
+    color: rgb(240, 240, 240);
+    font-size: 18px;
     font-family: 'Arial';
 }
