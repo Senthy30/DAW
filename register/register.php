@@ -20,16 +20,6 @@ $lname = validate($_POST['lname']);
 $password = validate($_POST['password']);
 $confirmpassword = validate($_POST['confirmpassword']);
 
-$to = 'denisflorin69@yahoo.com';
-$subject = 'Test Email';
-$message = 'This is a test email sent using PHP.';
-$headers = 'From: proiect-daw-php.herokuapp.com' . "\r\n";
-
-mail($to, $subject, $message, $headers);
-
-header("Location: index.php?error=Mail was sent!");
-exit();
-
 $domain = explode("@", $email);
 if(count($domain) != 2){
     header("Location: index.php?error=Invalid email!");
