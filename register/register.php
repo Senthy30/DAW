@@ -65,28 +65,24 @@ $sql = "SELECT * FROM users WHERE email = '$email'";
 $result = mysqli_query($conn, $sql);
 
 if(mysqli_num_rows($result) === 0){
-    sendMailForAccountConfirmation($email, $password);
-    /*
     $password = hash('sha512', $password);
-    $insertSQL = "INSERT INTO users (email, fname, lname, password) VALUES ('$email', '$fname', '$lname', '$password')";
+    $currentDate = date('Y-m-d H:i:s');
+
+    $token = hash('sha512', $email . $password . $fname . $lname);
+
+    $sql = "SELECT email FROM accountConfirmation WHERE email = '$email'";
+    $result = mysqli_query($conn, $sql);
+    if(mysqli_num_rows($result) != 0){
+        header("Location: index.php?error=A link of confirmation was already sent to this email!");
+        exit(); 
+    }
+
+    $insertSQL = "INSERT INTO accountConfirmation (token, email, fname, lname, password, date) VALUES ('$token', '$email', '$fname', '$lname', '$password', '$currentDate')";
     $wasInserted = mysqli_query($conn, $insertSQL);
 
-    if($wasInserted){
-        $getNewIDSQL = "SELECT id FROM users WHERE email = '$email' AND password = '$password';";
-        $newID = mysqli_query($conn, $getNewIDSQL);
-        $newID = $newID->fetch_object();
+    sendMailForAccountConfirmation($email, $token);
 
-        $insertSQL = "INSERT INTO permission (id_user, isAdmin) VALUES ('$newID->id', '0')";
-        $wasInserted = mysqli_query($conn, $insertSQL);
-
-        if($wasInserted){
-            header("Location: ../login/index.php?error=Registration successful!");
-            exit();
-        }
-    } 
-    */
-
-    header("Location: index.php?error=Something goes bad!");
+    header("Location: ../login/index.php?error=A link for account confirmation was sent on email!");
     exit();
 } else {
     header("Location: index.php?error=An account with this email already exists!");
