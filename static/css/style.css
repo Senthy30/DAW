@@ -16,7 +16,7 @@ p {
     z-index: -1;
     left: 0;
     top: 0;
-    width: 100vw;
+    width: 99vw;
     height: 40vh;
 }
 
@@ -245,6 +245,7 @@ p {
     height: 22vh;
     padding: 1%;
     background-color: #003580;
+    margin-bottom: 5vh;
 }
 
 .imageRoom {

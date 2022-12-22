@@ -23,7 +23,7 @@
 
 					<div class="optionsMenu">
 						<?php 
-							if(isset($_SESSION['id']) && isset($_SESSION['email'])){
+							if(isset($_SESSION['id'])){
 						?>	
 							<div class="menuButton" onclick="window.location.href = 'login/logout.php'">
 								<div class="textButton">
@@ -50,7 +50,7 @@
 
 						<?php 
 							$idUser = -1;
-							if(isset($_SESSION['id']) && isset($_SESSION['email']))
+							if(isset($_SESSION['id']))
 								$idUser = $_SESSION['id'];
 							$sql = "SELECT isAdmin FROM permission WHERE id_user = '$idUser';";
 							$result = mysqli_query($conn, $sql);
@@ -112,7 +112,7 @@
 
 					<div class="numberInput">
 						<div>
-							People
+							Persons
 						</div>
 
 						<input type="number" min="0">
@@ -127,81 +127,111 @@
 
 			</div>
 
-			<div class="adRoom">
-				<div class="imageRoom">
-					<img src="img/room.jpg">
-				</div>
-
-				<div class="contentRoom">
-					<div class="aboutRoom">
-						<div class="mainInfRoom">
-							<div class="nameRoom">
-								Luxury ⭐⭐⭐⭐⭐
-							</div>
-
-							<div class="infRoom">
-								<div class="firstInfRoom">
-									<div class="sthInfRoom">
-										Floor 4, Nr. 402
-									</div>
-
-									<div class="sthInfRoom">
-										Apartment with 2 rooms
-									</div>
-
-									<div class="sthInfRoom">
-										Surface 40m<sup>2</sup>
-									</div>
-								</div>
-
-								<div class="secondInfRoom">
-									<div class="sthInfRoom">
-										Cancellation up to 5 days before
-									</div>
-
-									<div class="sthInfRoom">
-										No advance is required
-									</div>
-
-									<div class="sthInfRoom">
-										Food included
-									</div>
-								</div>
-							</div>
+			<?php
+				$sql = "SELECT * FROM rooms;";
+				$resultQuery = mysqli_query($conn, $sql);
+				while($result = $resultQuery->fetch_object()){
+					$imagePath = "img/rooms/id_" . $result->id . "/1.jpg";
+					$name = $result->name . " ";
+					for($i = 0; $i < $result->stars; $i++){
+						$name = $name . "⭐";
+					}
+					$floorNr = "Floor " . $result->floor . ", Nr. " . $result->number;
+					$typeRoom = "Apartment with 2 rooms";
+					$surface = "Surface " . $result->surface .  "m<sup>2</sup>";
+					$cancellation = "No cancellation";
+					if($result->cancellation != -1)
+						$cancellation = "Cancellation up to " . $result->cancellation ." days before";
+					$advance = "No advance is required";
+					if($result->advance == 1)
+						$advance = "Advance is required";
+					$food = "Food included";
+					if($result->food == 0)
+						$food = "No food included";
+					$rating = $result->rating;
+					$price = $result->price . " lei";
+				?>
+					<div class="adRoom">
+						<div class="imageRoom">
+							<img src="<?php echo $imagePath ?>">
 						</div>
 
-						<div class="scInfRoom">
-							<div class="ratingRoom">
-								<div>
-									8.9
+						<div class="contentRoom">
+							<div class="aboutRoom">
+								<div class="mainInfRoom">
+									<div class="nameRoom">
+										<?php echo $name ?>
+									</div>
+
+									<div class="infRoom">
+										<div class="firstInfRoom">
+											<div class="sthInfRoom">
+												<?php echo $floorNr ?>
+											</div>
+
+											<div class="sthInfRoom">
+												<?php echo $typeRoom ?>
+											</div>
+
+											<div class="sthInfRoom">
+												<?php echo $surface ?>
+											</div>
+										</div>
+
+										<div class="secondInfRoom">
+											<div class="sthInfRoom">
+												<?php echo $cancellation ?>
+											</div>
+
+											<div class="sthInfRoom">
+												<?php echo $advance ?>
+											</div>
+
+											<div class="sthInfRoom">
+												<?php echo $food ?>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="scInfRoom">
+									<div class="ratingRoom">
+										<div>
+											<?php echo $rating ?>
+										</div>
+									</div>
+
+									<div class="priceRoom">
+										<div>
+											<?php echo $price ?>
+										</div>
+
+										<div>
+											3 nights, 4 persons
+										</div>
+									</div>
+
+									<div class="rentRoom">
+										<div>
+											Reserve now
+										</div>
+									</div>
 								</div>
 							</div>
-
-							<div class="priceRoom">
-								<div>
-									1850 lei
+							<?php 
+								if(!isset($_SESSION['id'])){
+							?>
+								<div class="needLogin">
+									<div>
+										Get an exclusive discount and see availability - Sign in
+									</div>
 								</div>
-
-								<div>
-									3 nights, 4 persons
-								</div>
-							</div>
-
-							<div class="rentRoom">
-								<div>
-									Reserve now
-								</div>
-							</div>
+							<?php } ?>
 						</div>
 					</div>
-
-					<div class="needLogin">
-						<div>
-							Get an exclusive discount and see availability - Sign in
-						</div>
-					</div>
-				</div>
-			</div>
+				<?php
+				}
+			?>
 
 		</div>
 
