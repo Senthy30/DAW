@@ -28,7 +28,7 @@
 						<?php 
 							if(isset($_SESSION['id'])){
 						?>	
-							<div class="menuButton" onclick="window.location.href = 'login/logout.php'">
+							<div class="menuButton" onclick="window.location.href = 'profile/index.php'">
 								<div class="textButton">
 									Profile
 								</div>

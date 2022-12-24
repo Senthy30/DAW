@@ -35,6 +35,7 @@ if(mysqli_num_rows($result) === 1){
         echo "Logged In!";
         $_SESSION['email'] = $row['email'];
         $_SESSION['fname'] = $row['fname'];
+        $_SESSION['lname'] = $row['lname'];
         $_SESSION['id'] = $row['id'];
         header("Location: ../index.php");
         exit();
