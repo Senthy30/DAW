@@ -2,10 +2,13 @@
     session_start(); 
 	include "../db_conn.php";
 
-    if(isset($_SESSION['message'])){
-        echo "<script> alert('" . $_SESSION['message'] . "');</script>";
-        unset($_SESSION['message']);
-    }
+    $dirName = "id_" . $_SESSION['id'] . "/";
+    $dirPath = "../img/profiles/" . $dirName;
+
+    if(!is_dir($dirPath))
+        $dirPath = "../img/profiles/user/"; 
+    
+    $dirPath = $dirPath . "main.jpg";
 ?>
 
 <!DOCTYPE html>
@@ -78,8 +81,21 @@
 
             <div class="aboutYou">
                 <div class="profileImage">
-                    <img src="../img/profiles/id_1/1.jpg">
-                    <button type="submit">Upload</button>
+                    <div class="divImageProfile">
+                        <img src=" <?php echo $dirPath; ?>">
+                    </div>
+
+                    <form action="uploadImage.php" method="POST" enctype="multipart/form-data" class="imageSubmitButtons">
+                        <label for="profileImageID">
+                            Browse
+                        </label>
+                        <input id="profileImageID" type="file" name="file">
+                        
+                        <label for="submitImageID">
+                            Upload
+                        </label>
+                        <input id="submitImageID" type="submit" name="submit">
+                    </form>
                 </div>
 
                 <div class="mainInformation">
@@ -97,14 +113,14 @@
                     </div>
 
                     <div class="elementInformation">
-                        <label>
+                        <label for="fname">
                             First name
                         </label>
                         <input id="fname" type="text" value="<?php echo $_SESSION['fname']; ?>" placeholder="First name">
                     </div>
 
                     <div class="elementInformation">
-                        <label>
+                        <label for="lname">
                             Last name
                         </label>
                         <input id="lname" type="text" value="<?php echo $_SESSION['lname']; ?>" placeholder="Last name">
@@ -122,21 +138,21 @@
                     </div>
 
                     <div class="elementInformation">
-                        <label>
+                        <label for="currentPassword">
                             Current password
                         </label>
                         <input id="currentPassword" type="password" placeholder="Password">
                     </div>
 
                     <div class="elementInformation">
-                        <label>
+                        <label for="newPassword">
                             New password
                         </label>
                         <input id="newPassword" type="password" placeholder="Password">
                     </div>
 
                     <div class="elementInformation">
-                        <label>
+                        <label for="confirmNewPassword">
                             Confirm new password
                         </label>
                         <input id="confirmNewPassword" type="password" placeholder="Password">
@@ -232,14 +248,14 @@
 
         </div>
 
-        <?php 
-            if(isset($_SESSION['message'])){
-                echo "<script> alert('" . $_SESSION['message'] . "');</script>";
-                unset($_SESSION['message']);
-            }
-        ?>
-
         <script src="../static/js/profile/script.js"></script>
     </body>
 
 </html>
+
+<?php 
+    if(isset($_SESSION['message'])){
+        echo "<script defer> alert('" . $_SESSION['message'] . "');</script>";
+        unset($_SESSION['message']);
+    }
+?>

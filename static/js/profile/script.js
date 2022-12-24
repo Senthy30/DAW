@@ -31,3 +31,12 @@ function changePassword() {
         window.location.href = 'index.php?';
     });
 }
+
+function uploadImage() {
+    imageVal = document.getElementById('profileImageID').files[0];
+
+    if(imageVal == null)
+        return;
+
+    alert(document.getElementById('profileImageID').files[0]);
+}
