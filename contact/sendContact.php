@@ -18,13 +18,13 @@
     $emailSender = $_SESSION['email'];
     $email = "denisflorin69@yahoo.com";
     $title = $_POST['title'];
-    $description = "Message from: $emailSender <br>";
+    $description = "Title: $title <br><br> Message from: $emailSender <br><br>";
     $description = $description . sanitize_input($_POST['description']);
 
-    sendMail($email, $title, $description);
+    sendMail($email, "Contact us", $description);
 
     $_SESSION['message'] = "The message was sent successfully!";
 
-    //header("Location: ../profile/index.php");
-    //exit();
+    header("Location: ../profile/index.php");
+    exit();
 ?>
