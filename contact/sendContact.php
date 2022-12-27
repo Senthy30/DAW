@@ -25,6 +25,6 @@
 
     $_SESSION['message'] = "The message was sent successfully!";
 
-    header("Location: ../profile/index.php");
-    exit();
+    //header("Location: ../profile/index.php");
+    //exit();
 ?>
