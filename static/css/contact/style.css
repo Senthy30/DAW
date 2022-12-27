@@ -17,7 +17,7 @@ p {
     left: 0;
     top: 0;
     width: 99vw;
-    height: 40vh;
+    height: 100vh;
 }
 
 .topPage {
@@ -125,117 +125,79 @@ p {
     font-family: 'Arial';
 }
 
-.aboutYou {
-    height: 15vh;
-    margin-top: 11vh;
-}
-
-.motto {
-    color: white;
-    font-size: 40px;
-    font-weight: bold;
-    font-family: 'Arial';
-}
-
-.searchMotto{
-    margin-top: 2vh;
-    color: white;
-    font-size: 25px;
-    font-family: 'Arial';
-}
-
-.searchMenu {
-    display: flex;
-    flex-direction: row;
+.loginMenu {
     background-color: #FEBB02;
-    margin-top: 3vh;
-    height: 6vh;
-    width: 50%;
-    margin-left: 24%;
-    padding: 0.5% 1%;
+    width: 100%;
 }
 
-.typeInput{
-    width: 40%;
+.loginMenu > form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
     height: 100%;
 }
 
-.typeInput > input {
+.loginMenu > form input {
     width: 100%;
-    height: 90%;
-    border: 1px white solid;
-    font-family: 'Arial';
-    font-size: 22px;
-}
-
-.periodInput {
-    display: flex;
-    flex-direction: row;
-    width: 25%;
-}
-
-.checkInOut {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: 30%;
-    margin-right: 4%;
-}
-
-.checkInOut > input {
-    height: 60%;
-    width: 95%;
-}
-
-.checkInOut > div {
-    color: black;
-    font-size: 15px;
-    font-weight: bold;
-    font-family: 'Arial';
-}
-
-.numberInput {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: 10%;
-}
-
-.numberInput > input {
-    height: 60%;
-    width: 93%;
+    height: 5vh;
     font-size: 20px;
+    border-width: 0;
+    border-radius: 10px;
 }
 
-.numberInput > div {
-    color: black;
-    font-size: 15px;
-    font-weight: bold;
+.loginMenu > form textarea {
+    resize: none;
+    width: 100%;
+    font-size: 20px;
+    border-width: 0;
+    border-radius: 10px;
+    margin-bottom: 1vh;
+}
+
+.loginMenu > form > div:nth-child(3){
+    margin-top: 1vh;
+}
+
+.labelDiv {
+    font-size: 20px;
     font-family: 'Arial';
+    font-weight: bold;
+    margin-bottom: 1vh;
 }
 
-.submitInput:hover {
+.submitButton {
+    width: 100%;
+    height: 5vh;
+    font-size: 22px;
+    font-family: 'Arial';
+    font-weight: bold;
+    color: white;
+    border-width: 1px;
+    background-color: #3867d6;
+    border-radius: 10px;
+}
+
+.submitButton:hover{
     cursor: pointer;
     background-color: #004ab0;
 }
 
-.submitInput {
-    width: 40%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #3867d6;
+.error {
+    font-size: 20px;
+    font-family: 'Arial';
+    font-weight: bold;
+    margin-bottom: -3vh;
+    color: #C73E1D;
 }
 
-.submitInput > div {
-    margin-left: 1vw;
-    margin-right: 1vw;
+.typePage{
     color: white;
-    font-size: 22px;
+    font-size: 40px;
     font-weight: bold;
     font-family: 'Arial';
+    margin-top: 7vh;
+    text-align: center;
 }
 
 .adRoom{
@@ -246,7 +208,7 @@ p {
     height: 22vh;
     padding: 1%;
     background-color: #003580;
-    margin-bottom: 5vh;
+    margin-bottom: 2vh;
 }
 
 .imageRoom {
@@ -266,6 +228,7 @@ p {
     flex-direction: column;
     width: 100%;
     margin-left: 1.1vw;
+    margin-bottom: 5vh;
 }
 
 .aboutRoom {
@@ -406,31 +369,9 @@ p {
     font-family: 'Arial';
 }
 
-.deleteRoom {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 18%;
-}
-
-.deleteRoom > a {
-    font-size: 19px;
-    font-family: 'Arial';
-    font-weight: bold;
-    text-decoration: none; 
-    color: #C73E1D;
-}
-
-.contact {
-    font-size: 18px;
-    font-family: 'Arial';
-    width: 100%;
-    text-align: center;
-    margin-bottom: 4vh;
-}
-
-.contact > a {
-    font-weight: bold;
-    color: #003580;
+.contentFeedback {
+    width: 92%;
+    margin-top: 5vh;
+    padding: 2% 4%;
+    background-color: #FEBB02;
 }

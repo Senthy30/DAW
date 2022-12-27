@@ -281,12 +281,33 @@
 										Get an exclusive discount and see availability - Sign in
 									</div>
 								</div>
-							<?php } ?>
+							<?php 
+								} else {
+									$sql = "SELECT isAdmin FROM permission WHERE id_user = '$idUser';";
+									$result = mysqli_query($conn, $sql);
+									$result = $result->fetch_object();
+
+									if($result->isAdmin){
+							?>
+								<div class="deleteRoom">
+									<a href="">
+										Delete room
+									</a>
+								</div>
+							<?php
+									}
+								}
+							?>
 						</div>
 					</div>
 				<?php
 				}
 			?>
+
+			<div class="contact">
+				Do you have any problems or you want to tell us something? <br>
+				<a href="contact/index.php">Contact us</a>
+			</div>
 
 		</div>
 		

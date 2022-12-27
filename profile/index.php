@@ -310,7 +310,7 @@
             </div>
 
             <div class="deleteAccount">
-                <a href="">Delete account</a>
+                <a href="deleteAccount/index.php">Delete account</a>
             </div>
 
         </div>

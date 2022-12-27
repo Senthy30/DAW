@@ -16,10 +16,40 @@
         exit();
     }
 
+    $idSession = $_SESSION['id'];
     $roomID = ($_GET['id'] - 1) * 10 + 1;
     $startDate = new DateTime($_GET['startDate']);
     $endDate = new DateTime($_GET['endDate']);
     $nights = $endDate->diff($startDate)->format("%a");
+
+    $sql = "SELECT id FROM visitors WHERE id_user = $idSession AND id_room = $roomID;";
+    $result = mysqli_query($conn, $sql);
+    if(mysqli_num_rows($result) == 0){
+        $sql = "INSERT INTO visitors (id_user, id_room) VALUES ($idSession, $roomID);";
+        $result = mysqli_query($conn, $sql);
+    }   
+
+    $sql = "SELECT accesses FROM rooms WHERE id = $roomID;";
+    $result = mysqli_query($conn, $sql);
+    $result = $result->fetch_object();
+    $numberAccesses = $result->accesses + 1;
+
+    $sql = "UPDATE rooms SET accesses = $numberAccesses WHERE id = $roomID;";
+    $result = mysqli_query($conn, $sql);
+    
+    $sql = "SELECT id FROM visitors WHERE id_room = $roomID;";
+    $result = mysqli_query($conn, $sql);
+    $numberVisitors = mysqli_num_rows($result);
+
+    $sql = "SELECT id FROM rents WHERE id_room = $roomID;";
+    $result = mysqli_query($conn, $sql);
+    $numberRents = mysqli_num_rows($result);
+
+    $sql = "SELECT id FROM feedbacks WHERE id_room = $roomID;";
+    $result = mysqli_query($conn, $sql);
+    $numberFeedbacks = mysqli_num_rows($result);
+
+    $staticInformation = "$numberAccesses accesses &#x2022; $numberVisitors visitors &#x2022; $numberRents rents &#x2022; $numberFeedbacks feedbacks ";
 ?>
 
 <!DOCTYPE html>
@@ -221,7 +251,7 @@
                     </div>
                     <div class="needLogin">
                         <div>
-                            21 accesses &#x2022; 15 visitors &#x2022; 8 rents &#x2022; 3 feedbacks 
+                            <?php echo $staticInformation; ?> 
                         </div>
                     </div>
                 </div>
