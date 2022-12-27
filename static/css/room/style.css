@@ -125,156 +125,16 @@ p {
     font-family: 'Arial';
 }
 
-.aboutYou {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 97%;
-    height: 32vh;
-    padding: 1.5%;
-    margin-top: 5vh;
-    border: 1px rgb(100, 100, 100) solid;
+.arrow {
+    border: solid black;
+    border-width: 0 4px 4px 0;
+    display: inline-block;
+    padding: 0.6%;
 }
 
-.profileImage {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100%;
-    width: 24%;
-    padding-right: 1.5vw;
-    border-right: 1px rgb(100, 100, 100) solid;
-}
-
-.divImageProfile {
-    height: 78%;
-    width: 100%;
-}
-
-.divImageProfile > img {
-    height: 100%;
-    width: 100%;
-    border-radius: 100%;
-}
-
-.imageSubmitButtons {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    height: 12%;
-    margin-top: 10%;
-    margin-bottom: 1%;
-}
-
-.imageSubmitButtons > input {
-    display: none;
-}
-
-.imageSubmitButtons > label:nth-child(1) {
-    margin-right: 1vw;
-}
-
-.imageSubmitButtons > label {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    width: 50%;
-    height: 100%;
-    font-size: 20px;
-    font-weight: bold;
-    font-family: 'Arial';
-    background-color: #3867d6;
-    color: white;
-    border: 2px black solid;
-    border-radius: 10px;
-}
-
-.imageSubmitButtons > label:hover {
-    cursor: pointer;
-    background-color: #004ab0;
-}
-
-.profileImage > img {
-    height: 82%;
-    width: 100%;
-    border-radius: 100%;
-}
-
-.mainInformation {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-    width: 37%;
-    padding-left: 1.5vw;
-    padding-right: 1.5vw;
-    border-right: 1px rgb(100, 100, 100) solid;
-}
-
-.elementInformation{
-    font-size: 24px;
-    font-family: 'Arial';
-    height: 20%;
-}
-
-.elementInformation > label {
-    font-size: 16px;
-    font-weight: normal;
-}
-
-.elementInformation > input {
-    width: 98%;
-    height: 50%;
-    font-size: 22px;
-}
-
-.titleInformation {
-    font-size: 25px;
-    font-family: 'Arial';
-    text-align: center;
-    height: 15%;
-}
-
-.submitButtons {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    height: 13%;
-    margin-top: 1vh;
-}
-
-.submitButtons > button {
-    width: 100%;
-    font-size: 20px;
-    font-weight: bold;
-    font-family: 'Arial';
-    background-color: #3867d6;
-    color: white;
-    border-radius: 5px;
-}
-
-.submitButtons > button:hover {
-    cursor: pointer;
-    background-color: #004ab0;
-}
-
-.submitButtons > button:nth-child(2) {
-    margin-left: 1vw;
-}
-
-.changePassword {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-    width: 37%;
-    padding-left: 1.5vw;
-}
-
-.history {
-    width: 100%;
-    margin-top: 5vh;
+.right {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
 }
 
 .titleDiv {
@@ -288,18 +148,6 @@ p {
     padding: 1% 2%;
 }
 
-.arrow {
-    border: solid black;
-    border-width: 0 4px 4px 0;
-    display: inline-block;
-    padding: 0.6%;
-}
-
-.right {
-    transform: rotate(-45deg);
-    -webkit-transform: rotate(-45deg);
-}
-
 .adRoom{
     display: flex;
     flex-direction: row;
@@ -308,7 +156,7 @@ p {
     height: 22vh;
     padding: 1%;
     background-color: #003580;
-    margin-top: 5vh;
+    margin: 5vh 0;
 }
 
 .imageRoom {
@@ -440,34 +288,29 @@ p {
     margin-top: 1vh;
 }
 
-.rentRoom > div {
+.rentRoom > form {
+    width: 80%;
     background-color: #1E91D6;
     border: 1px white solid;
-    padding: 3%;
     color: white;
     font-size: 23px;
     font-family: 'Arial';
     font-weight: bold;
 }
 
-.rentRoom > div:hover {
-    cursor: pointer;
-    filter: brightness(90%);
-}
-
-.deleteAccount {
-    width: 100%;
-    text-align: center;
-    margin-top: 5vh;
-    margin-bottom: 5vh;
-}
-
-.deleteAccount > a {
-    font-size: 18px;
+.rentRoom > form > button {
+    padding: 1% 8%;
+    border: none;
+    font-size: 23px;
     font-family: 'Arial';
     font-weight: bold;
-    text-decoration: none; 
-    color: #C73E1D;
+    color: white;
+    background-color: transparent;
+}
+
+.rentRoom > form > button:hover {
+    cursor: pointer;
+    filter: brightness(90%);
 }
 
 .needLogin {
@@ -480,4 +323,68 @@ p {
     color: rgb(240, 240, 240);
     font-size: 18px;
     font-family: 'Arial';
+}
+
+.feedback {
+    display: flex;
+    flex-direction: row;
+    width: 98%;
+    border: 1px rgb(100, 100, 100) solid;
+    margin-top: 5vh;
+    padding: 1%;
+    font-family: 'Arial';
+    background-color: aliceblue;
+}
+
+.user {
+    display: flex;
+    flex-direction: column;
+    width: 15%;
+    border-right: 1px rgb(100, 100, 100) solid;
+    padding-right: 1vw;
+}
+
+.profileImage {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 15vh;
+    margin-bottom: 1vh;
+}
+
+.profileImage > img {
+    width: 90%;
+    height: 100%;
+    border-radius: 100%;
+    border: 2px black solid;
+}
+
+.username {
+    width: 100%;
+    font-weight: bold;
+    text-align: center;
+}
+
+.opinion {
+    display: flex;
+    flex-direction: column;
+    width: 85%;
+    padding-left: 1vw;
+}
+
+.note {
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 1%;
+}
+
+.description {
+    font-size: 18px;
+}
+
+.marginBottomDiv {
+    margin-top: 5vh;
 }

@@ -169,45 +169,103 @@
                     Order history <i class="arrow right"></i>
                 </div>
 
+                <?php
+                    $idSession = $_SESSION['id'];
+                    $sql = "SELECT * FROM rents WHERE id_user = $idSession;";
+                    $resultQuery = mysqli_query($conn, $sql);
+                    while($resultRents = $resultQuery->fetch_object()){
+                        $idRoom = $resultRents->id_room;
+                        $sqlRoom = "SELECT * FROM rooms WHERE id = $idRoom;";
+                        $result = mysqli_query($conn, $sqlRoom);
+                        $result = $result->fetch_object();
+
+                        $imagePath = "../img/rooms/id_" . $result->id . "/1.jpg";
+                        $name = $result->name . " ";
+                        for($i = 0; $i < $result->stars; $i++){
+                            $name = $name . "⭐";
+                        }
+                        $floorNr = "Floor " . $result->floor . ", Nr. " . $result->number;
+                        
+                        $capacityRoom = 2;
+                        $typeRoom = "Apartment with 1 room";
+                        $typeValue = $result->type;
+                        if($typeValue >= 2 && $typeValue <= 5) {
+                            $typeRoom = "Apartment with " . $typeValue. " rooms"; 
+                            $capacityRoom = intval($typeValue) * 2;
+                        } else if($typeValue == 6)
+                            $typeRoom = "Double room";
+                        else if($typeRoom == 7) {
+                            $typeRoom = "Triple room";
+                            $capacityRoom = 3;
+                        } else if($typeRoom == 8) {
+                            $typeRoom = "Quadruple room";
+                            $capacityRoom = 4;
+                        }
+
+                        $surface = "Surface " . $result->surface .  "m<sup>2</sup>";
+                        $cancellation = "No cancellation";
+                        if($result->cancellation != -1)
+                            $cancellation = "Cancellation up to " . $result->cancellation ." days before";
+                        $advance = "No advance is required";
+                        if($result->advance == 1)
+                            $advance = "Advance is required";
+                        $food = "Food included";
+                        if($result->food == 0)
+                            $food = "No food included";
+                        
+                        $sqlFeedback = "SELECT AVG(note) as SumNote FROM feedbacks WHERE id_room = $idRoom";
+                        $resultFeedback = mysqli_query($conn, $sqlFeedback);
+                        $resultFeedback = $resultFeedback->fetch_object();
+                        $rating = intval($resultFeedback->SumNote * 100) / 100;
+                        if($rating == 0)
+						    $rating = "No feedback";
+                        
+                        $startDate = new DateTime($resultRents->startDate);
+                        $endDate = new DateTime($resultRents->endDate);
+                        $nights = $endDate->diff($startDate)->format("%a"); 
+
+                        $price = ($result->price * intval($nights)) . " lei";
+                ?>
+
 
                 <div class="adRoom">
                     <div class="imageRoom">
-                        <img src="../img/rooms/id_1/1.jpg">
+                        <img src="<?php echo $imagePath ?>">
                     </div>
 
                     <div class="contentRoom">
                         <div class="aboutRoom">
                             <div class="mainInfRoom">
                                 <div class="nameRoom">
-                                    Luxury ⭐⭐⭐⭐⭐
+                                    <?php echo $name ?>
                                 </div>
 
                                 <div class="infRoom">
                                     <div class="firstInfRoom">
                                         <div class="sthInfRoom">
-                                            Floor 4, Nr. 402
+                                            <?php echo $floorNr ?>
                                         </div>
 
                                         <div class="sthInfRoom">
-                                            Apartment with 2 rooms
+                                            <?php echo $typeRoom ?>
                                         </div>
 
                                         <div class="sthInfRoom">
-                                            Surface 40m<sup>2</sup>
+                                            <?php echo $surface ?>
                                         </div>
                                     </div>
 
                                     <div class="secondInfRoom">
                                         <div class="sthInfRoom">
-                                            Cancellation up to 5 days before
+                                            <?php echo $cancellation ?>
                                         </div>
 
                                         <div class="sthInfRoom">
-                                            No advance is required
+                                            <?php echo $advance ?>
                                         </div>
 
                                         <div class="sthInfRoom">
-                                            Food included
+                                            <?php echo $food ?>
                                         </div>
                                     </div>
                                 </div>
@@ -216,29 +274,38 @@
                             <div class="scInfRoom">
                                 <div class="ratingRoom">
                                     <div>
-                                        8.9
+                                        <?php echo $rating ?>
                                     </div>
                                 </div>
 
                                 <div class="priceRoom">
                                     <div>
-                                        1850 lei
+                                        <?php echo $price ?>
                                     </div>
 
                                     <div>
-                                        3 nights, 4 persons
+                                        <?php if($nights == 1) echo "1 night"; else echo $nights; ?>, <?php echo $capacityRoom ?> persons
                                     </div>
                                 </div>
 
-                                <div class="rentRoom">
+                                <div class="rentRoom" onclick="window.location.href = 'feedback/index.php?id=<?php echo (intval($result->id / 10) + 1); ?>'">
                                     <div>
-                                        Give Feedback
+                                        Give feedback
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="needLogin">
+                            <div>
+                                <?php echo "From: " . $resultRents->startDate . "   To: " . $resultRents->endDate; ?>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+                <?php
+                    }
+                ?>
 
             </div>
 

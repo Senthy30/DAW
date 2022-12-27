@@ -168,9 +168,18 @@
 					$food = "Food included";
 					if($result->food == 0)
 						$food = "No food included";
-					$rating = $result->rating;
-					$price = $result->price . " lei";
-				?>
+
+
+					$sqlFeedback = "SELECT AVG(note) as SumNote FROM feedbacks WHERE id_room = $result->id";
+					$resultFeedback = mysqli_query($conn, $sqlFeedback);
+					$resultFeedback = $resultFeedback->fetch_object();
+					$rating = intval($resultFeedback->SumNote * 100) / 100;
+					if($rating == 0)
+						$rating = "No feedback";
+					
+					$nights = 1;
+					$price = ($result->price * $nights) . " lei";
+			?>
 					<div class="adRoom">
 						<div class="imageRoom">
 							<img src="<?php echo $imagePath ?>">
@@ -227,13 +236,13 @@
 										</div>
 
 										<div>
-											3 nights, <?php echo $capacityRoom ?> persons
+											<?php if($nights == 1) echo "1 night"; else echo $nights; ?> , <?php echo $capacityRoom ?> persons
 										</div>
 									</div>
 
-									<div class="rentRoom">
+									<div class="rentRoom" onclick="window.location.href = 'room/index.php?id=<?php echo (intval($result->id / 10) + 1); ?>'">
 										<div>
-											Reserve now
+											See details
 										</div>
 									</div>
 								</div>
