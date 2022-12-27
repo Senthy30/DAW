@@ -2,6 +2,11 @@
     session_start(); 
 	include "../db_conn.php";
 
+    if(!isset($_SESSION['id'])) {
+        header("Location: ../login/index.php?You need to login!");
+        exit();
+    }
+
     $dirName = "id_" . $_SESSION['id'] . "/";
     $dirPath = "../img/profiles/" . $dirName;
 

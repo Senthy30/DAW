@@ -18,7 +18,7 @@
     $emailSender = $_SESSION['email'];
     $email = "denisflorin69@yahoo.com";
     $title = $_POST['title'];
-    $description = "Title: $title <br><br> Message from: $emailSender <br><br>";
+    $description = "Title: $title <br><br> From: $emailSender <br><br> Message: ";
     $description = $description . sanitize_input($_POST['description']);
 
     sendMail($email, "Contact us", $description);
