@@ -87,7 +87,7 @@
                 <div class="contentFeedback">
 
                     <div class="loginMenu">
-                        <form action="createFeedback.php" method="POST">
+                        <form action="sendContact.php" method="POST">
                             <div class="error">
                                 <?php
                                     if(isset($_GET['error'])) {
