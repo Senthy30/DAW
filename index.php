@@ -304,10 +304,18 @@
 				}
 			?>
 
+			<?php 
+				if(!isset($_SESSION['id'])){
+			?>
+
 			<div class="contact">
 				Do you have any problems or you want to tell us something? <br>
 				<a href="contact/index.php">Contact us</a>
 			</div>
+
+			<?php
+				}
+			?>
 
 		</div>
 		

@@ -20,4 +20,9 @@
     $description = sanitize_input($_POST['description']);
 
     sendMail($email, $title, $description);
+
+    $_SESSION['message'] = "The message was sent successfully!";
+    
+    header("Location: ../profile/index.php");
+    exit();
 ?>
