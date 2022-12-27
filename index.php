@@ -1,6 +1,34 @@
 <?php 
 	session_start(); 
 	include "db_conn.php";
+
+	function validateDate($date, $format = 'Y-m-d'){
+        $d = DateTime::createFromFormat($format, $date);
+        return $d && $d->format($format) === $date;
+    }
+
+	$isOk = true;
+	$nights = 1;
+	if(isset($_GET['startDate']) && isset($_GET['endDate'])) {
+		$isOk = (!empty(validateDate($_GET['startDate'])) && !empty(validateDate($_GET['endDate'])));
+		if($isOk){
+			$startDate = new DateTime($_GET['startDate']);
+    		$endDate = new DateTime($_GET['endDate']);
+			if($startDate > $endDate)
+				$isOk = false;
+    		$nights = $endDate->diff($startDate)->format("%a");
+
+			$startDate = $_GET['startDate'];
+			$endDate = $_GET['endDate'];
+		}
+	} else if(isset($_GET['startDate']) || isset($_GET['endDate'])){
+		$isOk = false;
+	} 
+
+    if(!$isOk){
+        header("Location: index.php");
+        exit();
+    }
 ?>
 
 <!DOCTYPE html>
@@ -93,16 +121,13 @@
 				</div>
 
 				<div class="searchMenu">
-					<div class="typeInput">
-						<input type="text" placeholder="Type of room">
-					</div>
 
 					<div class="checkInOut">
 						<div>
 							Check-in
 						</div>
 
-						<input type="date">
+						<input id="startDate" type="date" name="startDate" required>
 					</div>
 
 					<div class="checkInOut">
@@ -110,18 +135,10 @@
 							Check-out
 						</div>
 
-						<input type="date">
+						<input id="endDate" type="date" name="endDate" required>
 					</div>
 
-					<div class="numberInput">
-						<div>
-							Persons
-						</div>
-
-						<input type="number" min="0">
-					</div>
-
-					<div class="submitInput">
+					<div class="submitInput" onclick="changePeriod()">
 						<div>
 							Submit
 						</div>
@@ -176,8 +193,7 @@
 					$rating = intval($resultFeedback->SumNote * 100) / 100;
 					if($rating == 0)
 						$rating = "No feedback";
-					
-					$nights = 1;
+				
 					$price = ($result->price * $nights) . " lei";
 			?>
 					<div class="adRoom">
@@ -236,13 +252,23 @@
 										</div>
 
 										<div>
-											<?php if($nights == 1) echo "1 night"; else echo $nights; ?> , <?php echo $capacityRoom ?> persons
+											<?php if($nights == 1) echo "1 night"; else echo $nights. " nights"; ?> , <?php echo $capacityRoom ?> persons
 										</div>
 									</div>
 
-									<div class="rentRoom" onclick="window.location.href = 'room/index.php?id=<?php echo (intval($result->id / 10) + 1); ?>'">
+									<?php
+										if(isset($startDate) && isset($endDate))
+											$pathRoom = "room/index.php?id=" . (intval($result->id / 10) + 1) . "&startDate=" . $startDate . "&endDate=" . $endDate;
+										else $pathRoom = "index.php";
+									?>
+
+									<div class="rentRoom" onclick="window.location.href = '<?php echo $pathRoom; ?>'">
 										<div>
-											See details
+											<?php
+												if(isset($startDate) && isset($endDate))
+													echo "See details";
+												else echo "Select a period";
+											?>
 										</div>
 									</div>
 								</div>
@@ -263,6 +289,7 @@
 			?>
 
 		</div>
-
+		
+		<script src="static/js/script.js"></script>
 	</body>
 </html>

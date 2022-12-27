@@ -219,7 +219,7 @@
                                         </div>
 
                                         <div>
-                                            <?php if($nights == 1) echo "1 night"; else echo $nights; ?>, <?php echo $capacityRoom ?> persons
+                                            <?php if($nights == 1) echo "1 night"; else echo $nights. " nights"; ?>, <?php echo $capacityRoom ?> persons
                                         </div>
                                     </div>
                                 </div>

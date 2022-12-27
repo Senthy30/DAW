@@ -147,13 +147,12 @@ p {
 .searchMenu {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     background-color: #FEBB02;
     margin-top: 3vh;
     height: 6vh;
-    padding: 0.4%;
-    width: 80%;
-    margin-left: 10%;
+    width: 50%;
+    margin-left: 24%;
+    padding: 0.5% 1%;
 }
 
 .typeInput{
@@ -180,7 +179,8 @@ p {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    width: 10%;
+    width: 30%;
+    margin-right: 4%;
 }
 
 .checkInOut > input {
@@ -222,6 +222,7 @@ p {
 }
 
 .submitInput {
+    width: 40%;
     display: flex;
     justify-content: center;
     align-items: center;

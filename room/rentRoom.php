@@ -18,11 +18,9 @@
     $isOk |= (!isset($_POST['startDate']) || empty(validateDate($_POST['startDate'])));
     $isOk |= (!isset($_POST['endDate']) || empty(validateDate($_POST['endDate'])));
 
-    echo $_POST['idRoom'] . " - " . $_POST['startDate'] . " - " . $_POST['endDate'];
-
     if($isOk){
-        //header("Location: index.php");
-        //exit();
+        header("Location: index.php");
+        exit();
     }
 
     $idRoom = $_POST['idRoom'];
@@ -32,8 +30,11 @@
     $endDate = new DateTime($_POST['endDate']);
     $endDate = $endDate->format('Y-m-d');
 
-    $sqlInsert = "INSERT INTO rents (id_user, id_room, startDate, endDate) VALUES ($idSession, $idRoom, $startDate, $endDate)";
+    $sqlInsert = "INSERT INTO rents (id_user, id_room, startDate, endDate) VALUES ($idSession, $idRoom, '$startDate', '$endDate')";
     $resultInsert = mysqli_query($conn, $sqlInsert);
 
-    print_r($resultInsert);
+    $_SESSION['message'] = "You rent successfully a room!";
+
+    header("Location: ../profile/index.php");
+    exit();
 ?>
