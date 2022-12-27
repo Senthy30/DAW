@@ -46,28 +46,20 @@
 						<?php 
 							if(isset($_SESSION['id'])){
 						?>	
-							<div class="menuButton" onclick="window.location.href = 'login/logout.php'">
+							<div class="menuButton" onclick="window.location.href = '../index.php'">
 								<div class="textButton">
 									Profile
 								</div>
 							</div>
 						<?php 
-							} else {
-						?>
-                            <div class="menuButton" onclick="window.location.href = '../register/index.php'">
-								<div class="textButton">
-									Register
-								</div>
-							</div>
-                        <?php
-							}
+							} 
 						?>
                                 
-							<div class="menuButton" onclick="window.location.href = '../index.php'">
-								<div class="textButton">
-									Home
-								</div>
-							</div>
+                        <div class="menuButton" onclick="window.location.href = '../../index.php'">
+                            <div class="textButton">
+                                Home
+                            </div>
+                        </div>
 
 						<?php 
 							$idUser = -1;
