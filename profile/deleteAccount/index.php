@@ -45,7 +45,7 @@
 						?>	
 							<div class="menuButton" onclick="window.location.href = '../index.php'">
 								<div class="textButton">
-									Profiles
+									Profile
 								</div>
 							</div>
 
