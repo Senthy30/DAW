@@ -36,6 +36,7 @@
 
     $typeCurrency = "RON";
     $exchangeRate = 1;
+    $_SESSION['currency'] = "RON";
 
     function getCurrency($prefixFile){
         global $typeCurrency, $exchangeRate;
