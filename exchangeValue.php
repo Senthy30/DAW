@@ -1,6 +1,6 @@
 <?php
 
-    function updateExchangeValue() {
+    function updateExchangeValue($prefixFile) {
         $endpoint = "https://api.exchangerate-api.com/v4/latest/RON";
         $api_key = "7a57f1f089d003a79d0fd97d";
 
@@ -21,7 +21,7 @@
         if ($response_code == 200) {
             $response_obj = json_decode($response);
 
-            $filename = "exchangeValues.txt";
+            $filename = $prefixFile . "exchangeValues.txt";
             $file = fopen($filename, "w");
 
             $json = json_encode($response_obj->rates);
@@ -39,6 +39,17 @@
 
     function getCurrency($prefixFile){
         global $typeCurrency, $exchangeRate;
+
+        $filename = $prefixFile . "lastUpdateExchangeValues.txt";
+
+        $lastDate = new DateTime(file_get_contents($filename));
+        $currentDate = new DateTime();
+        
+        $diff = $currentDate->diff($lastDate)->format("%a");
+        if($diff > 0){
+            updateExchangeValue($prefixFile);
+            file_put_contents($filename, date("Y-m-d"));
+        }
 
         $filename = $prefixFile . "exchangeValues.txt";
         $json = file_get_contents($filename);
