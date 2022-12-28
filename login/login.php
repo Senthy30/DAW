@@ -33,6 +33,7 @@ if(mysqli_num_rows($result) === 1){
     $row = mysqli_fetch_assoc($result);
     if($row['email'] === $email && $row['password'] === $password){
         echo "Logged In!";
+        $_SESSION['currency'] = "RON";
         $_SESSION['email'] = $row['email'];
         $_SESSION['fname'] = $row['fname'];
         $_SESSION['lname'] = $row['lname'];

@@ -17,13 +17,13 @@ p {
     left: 0;
     top: 0;
     width: 99vw;
-    height: 10vh;
+    height: 100vh;
 }
 
 .topPage {
     width: 100%;
-    height: 10vh;
-    margin-bottom: 3vh;
+    height: 40vh;
+    margin-bottom: 6vh;
 }
 
 .topMenu {
@@ -142,179 +142,72 @@ p {
     font-weight: bold;
 }
 
-.aboutYou {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 97%;
-    height: 32vh;
-    padding: 1.5%;
-    margin-top: 5vh;
-    border: 1px rgb(100, 100, 100) solid;
+
+.loginMenu {
+    height: 35vh;
+    width: 100%;
 }
 
-.profileImage {
+.loginMenu > form {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    height: 100%;
-    width: 24%;
-    padding-right: 1.5vw;
-    border-right: 1px rgb(100, 100, 100) solid;
-}
-
-.divImageProfile {
-    height: 78%;
+    justify-content: space-between;
     width: 100%;
-}
-
-.divImageProfile > img {
     height: 100%;
+}
+
+.loginMenu > form input {
     width: 100%;
-    border-radius: 100%;
-}
-
-.imageSubmitButtons {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    height: 12%;
-    margin-top: 10%;
-    margin-bottom: 1%;
-}
-
-.imageSubmitButtons > input {
-    display: none;
-}
-
-.imageSubmitButtons > label:nth-child(1) {
-    margin-right: 1vw;
-}
-
-.imageSubmitButtons > label {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    width: 50%;
-    height: 100%;
+    height: 5vh;
     font-size: 20px;
-    font-weight: bold;
-    font-family: 'Arial';
-    background-color: #3867d6;
-    color: white;
-    border: 2px black solid;
+    border-width: 0;
     border-radius: 10px;
 }
 
-.imageSubmitButtons > label:hover {
-    cursor: pointer;
-    background-color: #004ab0;
-}
-
-.profileImage > img {
-    height: 82%;
-    width: 100%;
-    border-radius: 100%;
-}
-
-.mainInformation {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-    width: 37%;
-    padding-left: 1.5vw;
-    padding-right: 1.5vw;
-    border-right: 1px rgb(100, 100, 100) solid;
-}
-
-.elementInformation{
-    font-size: 24px;
+.areYouSure {
+    font-weight: bold;
     font-family: 'Arial';
-    height: 20%;
 }
 
-.elementInformation > label {
-    font-size: 16px;
-    font-weight: normal;
-}
-
-.elementInformation > input {
-    width: 98%;
-    height: 50%;
-    font-size: 22px;
-}
-
-.titleInformation {
-    font-size: 25px;
-    font-family: 'Arial';
-    text-align: center;
-    height: 15%;
-}
-
-.submitButtons {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    height: 13%;
-    margin-top: 1vh;
-}
-
-.submitButtons > button {
-    width: 100%;
+.labelDiv {
     font-size: 20px;
-    font-weight: bold;
     font-family: 'Arial';
-    background-color: #3867d6;
-    color: white;
-    border-radius: 5px;
+    font-weight: bold;
+    margin-bottom: 1vh;
 }
 
-.submitButtons > button:hover {
-    cursor: pointer;
-    background-color: #004ab0;
-}
-
-.submitButtons > button:nth-child(2) {
-    margin-left: 1vw;
-}
-
-.changePassword {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-    width: 37%;
-    padding-left: 1.5vw;
-}
-
-.history {
+.submitButton {
     width: 100%;
-    margin-top: 5vh;
-}
-
-.titleDiv {
-    width: 96%;
-    font-size: 30px;
+    height: 5vh;
+    font-size: 22px;
     font-family: 'Arial';
     font-weight: bold;
-    color: black;
-    background-color: #FEBB02;
-    border: 1px rgb(100, 100, 100) solid;
-    padding: 1% 2%;
+    color: white;
+    border-width: 1px;
+    background-color: #C73E1D;
+    border-radius: 10px;
 }
 
-.arrow {
-    border: solid black;
-    border-width: 0 4px 4px 0;
-    display: inline-block;
-    padding: 0.6%;
+.submitButton:hover{
+    cursor: pointer;
+    background-color: #9a3218;
 }
 
-.right {
-    transform: rotate(-45deg);
-    -webkit-transform: rotate(-45deg);
+.error {
+    font-size: 20px;
+    font-family: 'Arial';
+    font-weight: bold;
+    margin-bottom: -3vh;
+    color: #C73E1D;
+}
+
+.typePage{
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    font-family: 'Arial';
+    margin-top: 7vh;
+    text-align: center;
 }
 
 .adRoom{
@@ -325,7 +218,7 @@ p {
     height: 22vh;
     padding: 1%;
     background-color: #003580;
-    margin-top: 5vh;
+    margin-bottom: 2vh;
 }
 
 .imageRoom {
@@ -343,8 +236,10 @@ p {
 .contentRoom {
     display: flex;
     flex-direction: column;
+    height: 100%;
     width: 100%;
     margin-left: 1.1vw;
+    margin-bottom: 5vh;
 }
 
 .aboutRoom {
@@ -381,7 +276,6 @@ p {
 
 .firstInfRoom {
     height: 100%;
-    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -391,7 +285,6 @@ p {
 
 .secondInfRoom {
     height: 100%;
-    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -409,6 +302,7 @@ p {
     width: 25%;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     padding-left: 1.1vw;
     padding-right: 1.1vw;
 }
@@ -472,21 +366,6 @@ p {
     filter: brightness(90%);
 }
 
-.deleteAccount {
-    width: 100%;
-    text-align: center;
-    margin-top: 5vh;
-    margin-bottom: 5vh;
-}
-
-.deleteAccount > a {
-    font-size: 18px;
-    font-family: 'Arial';
-    font-weight: bold;
-    text-decoration: none; 
-    color: #C73E1D;
-}
-
 .needLogin {
     display: flex;
     justify-content: center;
@@ -497,4 +376,11 @@ p {
     color: rgb(240, 240, 240);
     font-size: 18px;
     font-family: 'Arial';
+}
+
+.contentFeedback {
+    width: 92%;
+    margin-top: 5vh;
+    padding: 2% 4%;
+    background-color: #FEBB02;
 }

@@ -12,12 +12,26 @@
     }
 
     if(!isset($_SESSION['id']) || !isset($_GET['id']) || !is_numeric($_GET['id'])){
-        header("Location: ../index.php");
+        header("Location: ../../index.php");
         exit();
     }
 
     $idSession = $_SESSION['id'];
-    $idRoom = 1 + ($_GET['id'] - 1) * 10;
+    $sql = "SELECT isAdmin FROM permission WHERE id_user = $idSession;";
+    $result = mysqli_query($conn, $sql);
+    $result = $result->fetch_object();
+    if($result->isAdmin == 0){
+        header("Location: ../../index.php");
+        exit();
+    }
+
+    $idRoom = ($_GET['id'] - 1) * 10 + 1;
+    $sql = "SELECT id FROM rooms WHERE id = $idRoom;";
+    $result = mysqli_query($conn, $sql);
+    if(mysqli_num_rows($result) == 0){
+        header("Location: ../../index.php");
+        exit();
+    }
 ?>
 
 <!DOCTYPE html>
@@ -26,9 +40,9 @@
 
     <head>
 
-        <title>Login</title>
+        <title>Delete room</title>
 
-        <link rel="stylesheet" href="../../static/css/profile/feedback/style.css">
+        <link rel="stylesheet" href="../../static/css/admin/deleteRoom/style.css">
     </head>
 
     <body>
@@ -45,17 +59,11 @@
 					</div>
 
 					<div class="optionsMenu">
-						<?php 
-							if(isset($_SESSION['id'])){
-						?>	
-							<div class="menuButton" onclick="window.location.href = '../index.php'">
-								<div class="textButton">
-									Profile
-								</div>
-							</div>
-						<?php 
-							} 
-						?>
+                        <div class="menuButton" onclick="window.location.href = '../index.php'">
+                            <div class="textButton">
+                                Profile
+                            </div>
+                        </div>
                                 
                         <div class="menuButton" onclick="window.location.href = '../../index.php'">
                             <div class="textButton">
@@ -63,24 +71,11 @@
                             </div>
                         </div>
 
-						<?php 
-							$idUser = -1;
-							if(isset($_SESSION['id']))
-								$idUser = $_SESSION['id'];
-							$sql = "SELECT isAdmin FROM permission WHERE id_user = '$idUser';";
-							$result = mysqli_query($conn, $sql);
-							$result = $result->fetch_object();
-
-							if($idUser != -1 && $result->isAdmin == 1){ 
-						?>
-								<div class="menuButtonAdmin">
-									<div class="textButtonAdmin">
-										Admin
-									</div>
-								</div>
-						<?php 
-							} 
-						?>
+                        <div class="menuButtonAdmin">
+                            <div class="textButtonAdmin">
+                                Admin
+                            </div>
+                        </div>
 
 						<div class="language">
 							<img src="../../img/flagRo.png" class="flagLang">
@@ -103,19 +98,11 @@
 				</div>
 
                 <div class="typePage">
-                    Feedback
+                    Delete room
                 </div>
 
                 <div class="contentFeedback">
                     <?php
-                        $sql = "SELECT * FROM rents WHERE id_user = $idSession AND id_room = $idRoom;";
-                        $resultQuery = mysqli_query($conn, $sql);
-                        if(mysqli_num_rows($resultQuery) == 0){
-                            header("Location: ../index.php");
-                            exit();
-                        }
-                        $resultRents = $resultQuery->fetch_object();
-
                         $sqlRoom = "SELECT * FROM rooms WHERE id = $idRoom;";
                         $result = mysqli_query($conn, $sqlRoom);
                         $result = $result->fetch_object();
@@ -161,10 +148,7 @@
                         if($rating == 0)
 						    $rating = "No feedback";
 
-                        $startDate = new DateTime($resultRents->startDate);
-                        $endDate = new DateTime($resultRents->endDate);
-                        $nights = $endDate->diff($startDate)->format("%a"); 
-
+                        $nights = 1; 
                         $price = (intval(($result->price * $nights) * $exchangeRate)) . " $typeCurrency";
                     ?>
 
@@ -230,17 +214,11 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="needLogin">
-                                <div>
-                                    <?php echo "From: " . $resultRents->startDate . "   To: " . $resultRents->endDate; ?>
-                                </div>
-                            </div>
                         </div>
                     </div>
 
                     <div class="loginMenu">
-                        <form action="createFeedback.php" method="POST">
+                        <form action="deleteRoom.php" method="POST">
                             <div class="error">
                                 <?php
                                     if(isset($_GET['error'])) {
@@ -251,25 +229,29 @@
                                     }
                                 ?>
                             </div>
+
+                            <div class="areYouSure">
+                                Are you sure you want to delete this room forever? <br> If yes, enter you password and confirm it.
+                            </div>
+
+                            <div>
+                                <div class="labelDiv">
+                                    <label> Password </label>
+                                </div>
+                                <input type="password" name="pass" placeholder="Password">
+                            </div>
                             
-                            <div>
-                                <div class="labelDiv">
-                                    <label> Note </label>
-                                </div>
-                                <input type="number" name="note" placeholder="Note" min=0 max=10 step="0.01" required>
-                            </div>
-
-                            <div>
-                                <div class="labelDiv">
-                                    <label> Description </label>
-                                </div>
-                                <textarea name="description" rows="6" required></textarea>
-                            </div>
-
                             <input type="number" name="idRoom" value="<?php echo $idRoom; ?>" style="display: none;">
 
+                            <div>
+                                <div class="labelDiv">
+                                    <label> Confirm password </label>
+                                </div>
+                                <input type="password" name="confPass" placeholder="Confirm password">
+                            </div>
+
                             <div class="submitDiv">
-                                <button type="submit" class="submitButton"> Submit feedback </button>
+                                <button type="submit" class="submitButton"> Submit </button>
                             </div>
                         </form>
                     </div>

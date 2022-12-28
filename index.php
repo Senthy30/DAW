@@ -1,6 +1,8 @@
 <?php 
 	session_start(); 
 	include "db_conn.php";
+	include "exchangeValue.php";
+	getCurrency("");
 
 	function validateDate($date, $format = 'Y-m-d'){
         $d = DateTime::createFromFormat($format, $date);
@@ -90,7 +92,7 @@
 							if($idUser != -1 && $result->isAdmin == 1){ 
 						?>
 								<div class="menuButtonAdmin">
-									<div class="textButtonAdmin">
+									<div class="textButtonAdmin" onclick="window.location.href = 'admin/createRoom/index.php'">
 										Admin
 									</div>
 								</div>
@@ -103,7 +105,15 @@
 						</div>
 
 						<div class="currency">
-							RON
+							<form class="formCurrency" method="POST" action="changeExchangeCurrency.php">
+								<select class="selectCurrency" id="currentcyID" name="valCurrency" onchange='this.form.submit()'>
+									<option value="" disabled selected hidden><?php echo $_SESSION['currency']; ?></option>
+									<option value="RON">RON</option>
+									<option value="EUR">EUR</option>
+									<option value="GBP">GBP</option>
+									<option value="USD">USD</option>
+								</select>
+							</form>
 						</div>
 						
 					</div>
@@ -194,7 +204,7 @@
 					if($rating == 0)
 						$rating = "No feedback";
 				
-					$price = ($result->price * $nights) . " lei";
+					$price = (intval(($result->price * $nights) * $exchangeRate)) . " $typeCurrency";
 			?>
 					<div class="adRoom">
 						<div class="imageRoom">
@@ -257,8 +267,9 @@
 									</div>
 
 									<?php
+										$normalizedRoomId = (intval($result->id / 10) + 1);
 										if(isset($startDate) && isset($endDate))
-											$pathRoom = "room/index.php?id=" . (intval($result->id / 10) + 1) . "&startDate=" . $startDate . "&endDate=" . $endDate;
+											$pathRoom = "room/index.php?id=" . $normalizedRoomId . "&startDate=" . $startDate . "&endDate=" . $endDate;
 										else $pathRoom = "index.php";
 									?>
 
@@ -290,7 +301,7 @@
 									if($result->isAdmin){
 							?>
 								<div class="deleteRoom">
-									<a href="">
+									<a href="admin/deleteRoom/index.php?id=<?php echo $normalizedRoomId; ?>">
 										Delete room
 									</a>
 								</div>

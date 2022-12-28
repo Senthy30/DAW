@@ -1,6 +1,8 @@
 <?php 
     session_start(); 
 	include "../db_conn.php";
+    include "../exchangeValue.php";
+    getCurrency("../");
 
     if(!isset($_SESSION['id'])) {
         header("Location: ../login/index.php?You need to login!");
@@ -71,7 +73,15 @@
 						</div>
 
 						<div class="currency">
-							RON
+							<form class="formCurrency" method="POST" action="../changeExchangeCurrency.php">
+								<select class="selectCurrency" id="currentcyID" name="valCurrency" onchange='this.form.submit()'>
+									<option value="" disabled selected hidden><?php echo $_SESSION['currency']; ?></option>
+									<option value="RON">RON</option>
+									<option value="EUR">EUR</option>
+									<option value="GBP">GBP</option>
+									<option value="USD">USD</option>
+								</select>
+							</form>
 						</div>
 						
 					</div>
@@ -229,7 +239,7 @@
                         $endDate = new DateTime($resultRents->endDate);
                         $nights = $endDate->diff($startDate)->format("%a"); 
 
-                        $price = ($result->price * intval($nights)) . " lei";
+                        $price = (intval(($result->price * $nights) * $exchangeRate)) . " $typeCurrency";
                 ?>
 
 

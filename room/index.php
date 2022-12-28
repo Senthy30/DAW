@@ -1,6 +1,8 @@
 <?php
     session_start(); 
 	include "../db_conn.php";
+    include "../exchangeValue.php";
+    getCurrency("../");
 
     function validateDate($date, $format = 'Y-m-d'){
         $d = DateTime::createFromFormat($format, $date);
@@ -113,7 +115,15 @@
 						</div>
 
 						<div class="currency">
-							RON
+							<form class="formCurrency" method="POST" action="../changeExchangeCurrency.php">
+								<select class="selectCurrency" id="currentcyID" name="valCurrency" onchange='this.form.submit()'>
+									<option value="" disabled selected hidden><?php echo $_SESSION['currency']; ?></option>
+									<option value="RON">RON</option>
+									<option value="EUR">EUR</option>
+									<option value="GBP">GBP</option>
+									<option value="USD">USD</option>
+								</select>
+							</form>
 						</div>
 						
 					</div>
@@ -176,7 +186,7 @@
                 if($rating == 0)
                     $rating = "No feedback";
 
-                $price = ($result->price * $nights) . " lei";
+                $price = (intval(($result->price * $nights) * $exchangeRate)) . " $typeCurrency";
             ?>
 
             <div class="adRoom">
