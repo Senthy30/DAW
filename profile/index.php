@@ -303,9 +303,17 @@
                                     </div>
                                 </div>
 
-                                <div class="rentRoom" onclick="window.location.href = 'feedback/index.php?id=<?php echo (intval($result->id / 10) + 1); ?>'">
-                                    <div>
-                                        Give feedback
+                                <div class="printFeedbackDiv">
+                                    <div class="actionOnRoom" onclick="window.location.href = 'feedback/index.php?id=<?php echo (intval($result->id / 10) + 1); ?>'">
+                                        <div>
+                                            Feedback
+                                        </div>
+                                    </div>
+
+                                    <div class="actionOnRoom" onclick="window.location.href = '../generatePDF/index.php?id=<?php echo $resultRents->id; ?>'">
+                                        <div>
+                                            Print
+                                        </div>
                                     </div>
                                 </div>
                             </div>
