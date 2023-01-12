@@ -1,7 +1,7 @@
 <?php
     session_start();
 
-    if (isset($_POST['submit'])) {
+    if (isset($_POST['submit']) && $_FILES['file']['error'] == UPLOAD_ERR_OK) {
         $file = $_FILES['file'];
 
         $fileName = $file['name'];
@@ -32,6 +32,9 @@
             header("Location: index.php");
             exit();
         }
+    } else {
+        header("Location: index.php");
+        exit();
     }
    
 ?>

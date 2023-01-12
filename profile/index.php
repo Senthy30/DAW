@@ -335,6 +335,12 @@
             <div class="deleteAccount">
                 <a href="deleteAccount/index.php">Delete account</a>
             </div>
+                
+            <div class="httpuser" style="width: 100%; text-align: center; margin-top: -1vh; margin-bottom: 4vh;">
+                <?php
+                    echo($_SERVER['HTTP_USER_AGENT']);
+                ?>
+            </div>
 
         </div>
 

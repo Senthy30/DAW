@@ -162,6 +162,21 @@
 				$sql = "SELECT * FROM rooms;";
 				$resultQuery = mysqli_query($conn, $sql);
 				while($result = $resultQuery->fetch_object()){
+					$isAvailable = true;
+					if(isset($_GET['startDate']) && isset($_GET['endDate'])){
+						$sqlDisp = "SELECT * FROM rents WHERE id_room = $result->id AND startDate <= '$startDate' AND endDate > '$startDate';";
+						$resultDisp = mysqli_query($conn, $sqlDisp);
+						$isAvailable &= (mysqli_num_rows($resultDisp) == 0);
+
+						$sqlDisp = "SELECT * FROM rents WHERE id_room = $result->id AND startDate < '$endDate' AND endDate > '$endDate';";
+						$resultDisp = mysqli_query($conn, $sqlDisp);
+						$isAvailable &= (mysqli_num_rows($resultDisp) == 0);
+
+						$sqlDisp = "SELECT * FROM rents WHERE id_room = $result->id AND startDate >= '$startDate' AND endDate < '$endDate';";
+						$resultDisp = mysqli_query($conn, $sqlDisp);
+						$isAvailable &= (mysqli_num_rows($resultDisp) == 0);
+					}
+
 					$imagePath = "img/rooms/id_" . $result->id . "/1.jpg";
 					$name = $result->name . " ";
 					for($i = 0; $i < $result->stars; $i++){
@@ -276,8 +291,10 @@
 									<div class="rentRoom" onclick="window.location.href = '<?php echo $pathRoom; ?>'">
 										<div>
 											<?php
-												if(isset($startDate) && isset($endDate))
+												if($isAvailable && isset($startDate) && isset($endDate))
 													echo "See details";
+												else if($isAvailable == false)
+													echo "Unavailable";
 												else echo "Select a period";
 											?>
 										</div>

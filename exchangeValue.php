@@ -34,9 +34,11 @@
         }
     }
 
-    $typeCurrency = "RON";
-    $exchangeRate = 1;
-    $_SESSION['currency'] = "RON";
+    if(!isset($_SESSION['currency'])){
+        $typeCurrency = "RON";
+        $exchangeRate = 1;
+        $_SESSION['currency'] = "RON";
+    }
 
     function getCurrency($prefixFile){
         global $typeCurrency, $exchangeRate;

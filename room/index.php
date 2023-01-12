@@ -9,6 +9,11 @@
         return $d && $d->format($format) === $date;
     }
 
+    if(!isset($_SESSION['id'])){
+        header("Location: ../index.php");
+        exit();
+    }
+
     $isOk = (!isset($_GET['id']) || !is_numeric($_GET['id']));
     $isOk |= (!isset($_GET['startDate']) || empty(validateDate($_GET['startDate'])));
     $isOk |= (!isset($_GET['endDate']) || empty(validateDate($_GET['endDate'])));
@@ -20,9 +25,30 @@
 
     $idSession = $_SESSION['id'];
     $roomID = ($_GET['id'] - 1) * 10 + 1;
+    $startDate = $_GET['startDate'];
+    $endDate = $_GET['endDate'];
+
+    $isAvailable = true;
+    $sqlDisp = "SELECT * FROM rents WHERE id_room = $roomID AND startDate <= '$startDate' AND endDate > '$startDate';";
+    $resultDisp = mysqli_query($conn, $sqlDisp);
+    $isAvailable &= (mysqli_num_rows($resultDisp) == 0);
+
+    $sqlDisp = "SELECT * FROM rents WHERE id_room = $roomID AND startDate < '$endDate' AND endDate > '$endDate';";
+    $resultDisp = mysqli_query($conn, $sqlDisp);
+    $isAvailable &= (mysqli_num_rows($resultDisp) == 0);
+
+    $sqlDisp = "SELECT * FROM rents WHERE id_room = $roomID AND startDate >= '$startDate' AND endDate < '$endDate';";
+    $resultDisp = mysqli_query($conn, $sqlDisp);
+    $isAvailable &= (mysqli_num_rows($resultDisp) == 0);
+
     $startDate = new DateTime($_GET['startDate']);
     $endDate = new DateTime($_GET['endDate']);
     $nights = $endDate->diff($startDate)->format("%a");
+
+    if($isAvailable == false){
+        header("Location: ../index.php");
+        exit();
+    }
 
     $sql = "SELECT id FROM visitors WHERE id_user = $idSession AND id_room = $roomID;";
     $result = mysqli_query($conn, $sql);
@@ -38,10 +64,6 @@
 
     $sql = "UPDATE rooms SET accesses = $numberAccesses WHERE id = $roomID;";
     $result = mysqli_query($conn, $sql);
-    
-    $sql = "SELECT id FROM visitors WHERE id_room = $roomID;";
-    $result = mysqli_query($conn, $sql);
-    $numberVisitors = mysqli_num_rows($result);
 
     $sql = "SELECT id FROM rents WHERE id_room = $roomID;";
     $result = mysqli_query($conn, $sql);
@@ -50,6 +72,19 @@
     $sql = "SELECT id FROM feedbacks WHERE id_room = $roomID;";
     $result = mysqli_query($conn, $sql);
     $numberFeedbacks = mysqli_num_rows($result);
+
+    $filename = "visitors.txt";
+    $json = file_get_contents($filename);
+    $json = json_decode($json);
+
+    if(!isset($json->$roomID))
+        $json->$roomID = new stdClass();
+    $ipUser = $_SERVER['REMOTE_ADDR'];
+    $json->$roomID->$ipUser = true;
+    $numberVisitors = count((array)$json->$roomID);
+
+    $json = json_encode($json);
+    file_put_contents($filename, $json);
 
     $staticInformation = "$numberAccesses accesses &#x2022; $numberVisitors visitors &#x2022; $numberRents rents &#x2022; $numberFeedbacks feedbacks ";
 ?>
