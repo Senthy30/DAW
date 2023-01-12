@@ -51,10 +51,10 @@
         exit();
     }
     
-    $sql = "SELECT AUTO_INCREMENT as AI FROM information_schema.tables WHERE table_name = 'rooms' AND table_schema = DATABASE();";
+    $sql = "SELECT MAX(id) as AI FROM rooms;";
     $result = mysqli_query($conn, $sql);
     $result = $result->fetch_object();
-    $idRoom = ($result->AI) + 9;
+    $idRoom = ($result->AI) + 10;
 
     $dirName = "id_" . $idRoom . "/";
     $dirPath = "../../img/rooms/" . $dirName;
@@ -70,7 +70,7 @@
     for($i = 0; $i < count($information); $i++)
         $values[] = $_POST[$information[$i]];
     
-    $sql = "INSERT INTO rooms (name, stars, floor, number, type, surface, advance, cancellation, food, price, accesses) VALUES ('$roomName', $values[0], $values[1], $values[2], $values[3], $values[4], $values[5], $values[6], $values[7], $values[8], 0);";
+    $sql = "INSERT INTO rooms (id, name, stars, floor, number, type, surface, advance, cancellation, food, price, accesses) VALUES ($idRoom, '$roomName', $values[0], $values[1], $values[2], $values[3], $values[4], $values[5], $values[6], $values[7], $values[8], 0);";
     $result = mysqli_query($conn, $sql);
     
     $_SESSION['message'] = "The room was added successfully!";

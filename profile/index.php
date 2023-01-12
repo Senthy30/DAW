@@ -60,7 +60,7 @@
 							if($idUser != -1 && $result->isAdmin == 1){ 
 						?>
 								<div class="menuButtonAdmin">
-									<div class="textButtonAdmin">
+									<div class="textButtonAdmin" onclick="window.location.href = '../admin/createRoom/index.php'">
 										Admin
 									</div>
 								</div>
