@@ -56,6 +56,13 @@
         exit();
     }
 
+    $currentDate = new DateTime();
+    $currentDate = $currentDate->format('Y-m-d');
+    if($startDate < $currentDate){
+        header("Location: ../index.php");
+        exit();
+    }
+
     $sqlInsert = "INSERT INTO rents (id_user, id_room, startDate, endDate) VALUES ($idSession, $idRoom, '$startDate', '$endDate')";
     $resultInsert = mysqli_query($conn, $sqlInsert);
 
