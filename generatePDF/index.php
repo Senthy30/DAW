@@ -144,7 +144,7 @@
                 $this->SetFont('Arial', '', 16);
                 $this->Cell(20, $height, "Noapte", 1, 0, 'C');
                 $this->SetFont('Arial', '', 18);
-                $this->Cell(20, $height, "4", 1, 0, 'C');
+                $this->Cell(20, $height, $nights, 1, 0, 'C');
                 $this->Cell(35, $height, round($priceWithoutTVA * 100) / 100, 1, 0, 'C');
                 $this->Cell(22, $height, $price * $nights, 1, 0, 'C');
                 $this->Cell(26, $height, round(($price - $priceWithoutTVA) * $nights * 100) / 100, 1, 0, 'C');
@@ -153,7 +153,7 @@
                 $this->SetFont('Arial', 'B', 40);
                 $this->Cell(165, 25, "Total", 1, 0, 'C');
                 $this->SetFont('Arial', 'B', 30);
-                $this->Cell(103, 25, "1300 RON", 1, 0, 'C');
+                $this->Cell(103, 25, $price * $nights . " RON", 1, 0, 'C');
             }
         }
 
