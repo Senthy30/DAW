@@ -34,15 +34,15 @@
     $endDate = $_POST['endDate'];
 
     $isAvailable = true;
-    $sqlDisp = "SELECT * FROM rents WHERE id_room = $roomID AND startDate <= '$startDate' AND endDate > '$startDate';";
+    $sqlDisp = "SELECT * FROM rents WHERE id_room = $idRoom AND startDate <= '$startDate' AND endDate > '$startDate';";
     $resultDisp = mysqli_query($conn, $sqlDisp);
     $isAvailable &= (mysqli_num_rows($resultDisp) == 0);
 
-    $sqlDisp = "SELECT * FROM rents WHERE id_room = $roomID AND startDate < '$endDate' AND endDate > '$endDate';";
+    $sqlDisp = "SELECT * FROM rents WHERE id_room = $idRoom AND startDate < '$endDate' AND endDate > '$endDate';";
     $resultDisp = mysqli_query($conn, $sqlDisp);
     $isAvailable &= (mysqli_num_rows($resultDisp) == 0);
 
-    $sqlDisp = "SELECT * FROM rents WHERE id_room = $roomID AND startDate >= '$startDate' AND endDate < '$endDate';";
+    $sqlDisp = "SELECT * FROM rents WHERE id_room = $idRoom AND startDate >= '$startDate' AND endDate < '$endDate';";
     $resultDisp = mysqli_query($conn, $sqlDisp);
     $isAvailable &= (mysqli_num_rows($resultDisp) == 0);
 
